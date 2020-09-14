@@ -19,7 +19,7 @@
     }
 Проверить, чтобы все работало без ошибок в консоли */
 
-const numberOfFilms = prompt('Сколько фильмов Вы уже посмотрели?', '');
+const numberOfFilms = +prompt('Сколько фильмов Вы уже посмотрели?', '');
 
 const personalMovieDB = {
     count: numberOfFilms,
@@ -29,16 +29,27 @@ const personalMovieDB = {
     privat: false
 };
 
-const movie1 = prompt('Один из последних просмотренных фильмов?', '');
+for (let i = 0; i < 2; i++) {
+    const movie = prompt('Один из последних просмотренных фильмов?', '');
+    const movieRaiting = prompt('На сколько оцените его?', '')
 
-const movieRaiting1 = prompt('На сколько оцените его?', '');
+    if (movie != null && movieRaiting != null && movie != '' && movieRaiting != '' && movie.length < 50) {
+        personalMovieDB['movies'][movie] = movieRaiting;
+        console.log('done');
+    } else {
+        i--;
+        console.log('error');
+    }
+}
 
-const movie2 = prompt('Один из последних просмотренных фильмов?', '');
-
-const movieRaiting2 = prompt('На сколько оцените его?', '');
-
-personalMovieDB['movies'][movie1] = movieRaiting1;
-
-personalMovieDB['movies'][movie2] = movieRaiting2;
+if (personalMovieDB.count < 10) {
+    console.log('Просмотрено довольно мало фильмов');
+} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+    console.log('Вы классический зритель');
+} else if (personalMovieDB.count >= 30) {
+    console.log('Вы киноман');
+} else {
+    console.log('Произошла ошибка');
+}
 
 console.log(personalMovieDB);
